@@ -1,143 +1,169 @@
-/**
- * @file index.js
- * @author 拆家大主教
- * @date 2020-6-20
- * @lastModifiedTime  2020-6-21
+/*
+ * @Author: 拆家大主教 
+ * @Date: 2021-09-27 21:57:38 
+ * @Last Modified by: 拆家大主教
+ * @Last Modified time: 2021-09-27 23:08:06
  */
-var TargetPeople = document.getElementById('打拳对象').value;
-var TargetPeopleSex = "木大木大木大木大木大"
-var TargetPeopleSexRadio = document.getElementsByName('sex');
-var TargetEvent = document.getElementById('打拳事件').value;
-var TargetPeopleSexContrary = TargetPeopleSex;
-var Famous = data.famous;   //a 代表前面垫话，b代表后面垫话
-var Front = data.before;   //在名人名言前面弄点废话
-var Back = data.after;   //在名人名言后面弄点废话
-var Crap1 = data.bosh1;   //代表文章主要废话来源
-var Crap2 = data.bosh2;   //代表文章主要废话来源
-var Begin = data.begin; //开头
-var End = data.end; //结尾
+
+const sexMap = {
+    male: {
+        targetPeopleSex: "男",
+        targetPeopleSexContrary: "女"
+    },
+    female: {
+        targetPeopleSex: "女",
+        targetPeopleSexContrary: "男"
+    },
+    thirdSex: {
+        targetPeopleSex: "第三",
+        targetPeopleSexContrary: "男性和女"
+    },
+}
+
+let targetPeople;
+let targetPeopleSex;
+let targetPeopleSexContrary;
+
+let targetPeopleSexRadio = $('[name="sex"]');
+let targetEvent = $('#event').val();
+
+const famous = data.famous;   //a 代表前面垫话，b代表后面垫话
+const front = data.before;   //在名人名言前面弄点废话
+const back = data.after;   //在名人名言后面弄点废话
+const crap1 = data.bosh1;   //代表文章主要废话来源
+const crap2 = data.bosh2;   //代表文章主要废话来源
+const begin = data.begin; //开头
+const end = data.end; //结尾
+
 /**
- * @function Total() - 主函数
+ * 主函数
  */
-function Total() {
-    TargetPeople = document.getElementById('打拳对象').value;
-    TargetEvent = document.getElementById('打拳事件').value;
-    if(TargetPeopleSexRadio[0].checked) {
-        TargetPeopleSex = "男";
-        TargetPeopleSexContrary = "女";
-    }else if(TargetPeopleSexRadio[1].checked) {
-        TargetPeopleSex = "女";
-        TargetPeopleSexContrary = "男";
-    }else {
-        TargetPeopleSex = "第三";
-        TargetPeopleSexContrary = "男性和女";
-    }
-    console.log(TargetPeopleSex);
+function total() {
+    targetPeople = $('#target').val();
+    targetEvent = $('#event').val();
+    targetPeopleSex =
+        (
+            targetPeopleSexRadio[0].checked
+                ? sexMap.male
+                : targetPeopleSexRadio[1].checked
+                    ? sexMap.female
+                    : sexMap.thirdSex
+        ).targetPeopleSex
+    targetPeopleSexContrary =
+        (
+            targetPeopleSexRadio[0].checked
+                ? sexMap.male
+                : targetPeopleSexRadio[1].checked
+                    ? sexMap.female
+                    : sexMap.thirdSex
+        ).targetPeopleSexContrary
+
     //生成article
-    document.getElementById('article').innerHTML = '<p id="InnerArticle"></p>';
-    var Tmp = "";
-    Tmp += GetBegin();
-    var SentenceInThisParagragh = 0;
-    while(Tmp.length < 10000) {
-        var Branch = 100 * Math.random();
-        if(Branch < 5 && SentenceInThisParagragh > 5) {
-            if(Tmp[-1] != "，") {
-                Tmp += AnotherCrap1();
-            }
-            Tmp += AnotherParagraph();
-            SentenceInThisParagragh = 0;
+    let tmp = paragraphStart();
+    tmp += getBegin();
+
+    let sentenceInThisParagragh = 0;
+    while (tmp.length < 10000) {
+        const branch = 100 * Math.random();
+        if (branch < 5 && sentenceInThisParagragh > 5) {
+            tmp[-1] !== "，"
+            && (tmp += anotherCrap1());
+            tmp += paragraphEnd() + paragraphStart();
+            sentenceInThisParagragh = 0;
         }
-        else if(Branch < 20){
-            Tmp += FamousSayings()
-            SentenceInThisParagragh++;
+        else if (branch < 20) {
+            tmp += famousSayings()
+            sentenceInThisParagragh++;
         }
-        else if(Branch < 60){
-            Tmp += AnotherCrap1();
-            SentenceInThisParagragh++;
+        else if (branch < 60) {
+            tmp += anotherCrap1();
+            sentenceInThisParagragh++;
         }
         else {
-            Tmp += AnotherCrap2();
-            SentenceInThisParagragh++;
+            tmp += anotherCrap2();
+            sentenceInThisParagragh++;
         }
     }
-    Tmp += GetEnd();
-    document.getElementById('InnerArticle').innerHTML = Tmp;
-    //console.log(Tmp);
+    tmp += getEnd();
+    $('#article').html(tmp);
 }
 
 /**
- * @function AntherParagragh() - 换行
+ * 换行
  */
-function AnotherParagraph() {
-    var xx = "<p>    ";
-    return xx;
+function paragraphStart() {
+
+    return "<p>    ";
 }
 
 /**
- * @function FamousSayings() - 名言
+ * 换行
  */
-function FamousSayings() {
-    var xx = "";
-    var a = Front[Math.floor(Front.length * Math.random())];
-    var b = Back[Math.floor(Back.length * Math.random())];
-    xx = Famous[Math.floor(Famous.length * Math.random())];
-    xx = xx.replace(/a/g,a);
-    xx = xx.replace(/b/g,b);
-    xx = xx.replace(/x/g,TargetPeople);
-    xx = xx.replace(/y/g,TargetEvent);
-    xx = xx.replace(/z/g,TargetPeopleSex);
-    xx = xx.replace(/s/g,TargetPeopleSexContrary);
-    return xx;
+ function paragraphEnd() {
+
+    return "</p>";
 }
 
 /**
- * @function AntherCrap1() - 结尾为句号的废话
+ * 名言
  */
-function AnotherCrap1() {
-    var xx = "";
-    xx = Crap1[Math.floor(Crap1.length * Math.random())];
-    xx = xx.replace(/x/g,TargetPeople);
-    xx = xx.replace(/y/g,TargetEvent);
-    xx = xx.replace(/z/g,TargetPeopleSex);
-    xx = xx.replace(/s/g,TargetPeopleSexContrary);
-    return xx;
+function famousSayings() {
+
+    let a = front[Math.floor(front.length * Math.random())];
+    let b = back[Math.floor(back.length * Math.random())];
+    return famous[Math.floor(famous.length * Math.random())]
+        .replace(/a/g, a)
+        .replace(/b/g, b)
+        .replace(/x/g, targetPeople)
+        .replace(/y/g, targetEvent)
+        .replace(/z/g, targetPeopleSex)
+        .replace(/s/g, targetPeopleSexContrary);
 }
 
 /**
- * @function AntherCrap2() - 结尾为逗号的废话
+ * 结尾为句号的废话
  */
-function AnotherCrap2() {
-    var xx = "";
-    xx = Crap2[Math.floor(Crap2.length * Math.random())];
-    xx = xx.replace(/x/g,TargetPeople);
-    xx = xx.replace(/y/g,TargetEvent);
-    xx = xx.replace(/z/g,TargetPeopleSex);
-    xx = xx.replace(/s/g,TargetPeopleSexContrary);
-    return xx;
+function anotherCrap1() {
+    
+    return crap1[Math.floor(crap1.length * Math.random())]
+        .replace(/x/g, targetPeople)
+        .replace(/y/g, targetEvent)
+        .replace(/z/g, targetPeopleSex)
+        .replace(/s/g, targetPeopleSexContrary);
 }
 
 /**
- *  @function GetBegin() - 文章开头
+ * 结尾为逗号的废话
  */
-function GetBegin() {
-    var xx = "";
-    xx = Begin[Math.floor(Begin.length * Math.random())];
-    xx = xx.replace(/x/g,TargetPeople);
-    xx = xx.replace(/y/g,TargetEvent);
-    xx = xx.replace(/z/g,TargetPeopleSex);
-    xx = xx.replace(/s/g,TargetPeopleSexContrary);
-    return xx;
+function anotherCrap2() {
+
+    return crap2[Math.floor(crap2.length * Math.random())]
+        .replace(/x/g, targetPeople)
+        .replace(/y/g, targetEvent)
+        .replace(/z/g, targetPeopleSex)
+        .replace(/s/g, targetPeopleSexContrary);
 }
 
 /**
- * @function GetEnd() - 文章结尾
+ * 文章开头
  */
-function GetEnd() {
-    var xx = "";
-    xx = End[Math.floor(End.length * Math.random())];
-    xx = xx.replace(/x/g,TargetPeople);
-    xx = xx.replace(/y/g,TargetEvent);
-    xx = xx.replace(/z/g,TargetPeopleSex);
-    xx = xx.replace(/s/g,TargetPeopleSexContrary);
-    return xx;
+function getBegin() {
+
+    return begin[Math.floor(begin.length * Math.random())]
+        .replace(/x/g, targetPeople)
+        .replace(/y/g, targetEvent)
+        .replace(/z/g, targetPeopleSex)
+        .replace(/s/g, targetPeopleSexContrary);
+}
+
+/**
+ * 文章结尾
+ */
+function getEnd() {
+
+    return end[Math.floor(end.length * Math.random())]
+        .replace(/x/g, targetPeople)
+        .replace(/y/g, targetEvent)
+        .replace(/z/g, targetPeopleSex)
+        .replace(/s/g, targetPeopleSexContrary);
 }
