@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>一开口就是老拳师了</title>
+		<link href="css/style.css" rel="stylesheet">	<!--css-->
+	</head>
+	<body>
+		<!--弹窗-->
+		<div id='pop_up'>
+			<img src="" id='pop_up_img'><img>
+			<p id='pop_up_word'>木大木大木大木大</p>
+		</div>
+		<!--主要部分-->
+		<div id='all'>
+			<!--标题-->
+			<div id='title'>
+				<span id='titleSpan'>一开口就是老拳师了</span>
+			</div>
+			<!--文本域&&按钮-->
+			<div id="Main">
+				<span id="before_打拳对象" class="before_input">打拳对象(为谁打拳)：</span>
+				<input type="text" id="打拳对象" class="input" placeholder="如：拆家大主教" value="拆家大主教"></input>
+				<span id="before_打拳事件" class="before_input">打拳事件：</span>
+				<input type="text" id="打拳事件" class="input" placeholder="如：惨遭老母猪无情虐待" value="惨遭老母猪无情虐待"></input>
+				</br>
+				<span id="before_打拳对象性别" class="before_input">打拳对象性别：</span>
+				<input type="radio" name="sex" id="打拳对象性别" value="男">男
+				<input type="radio" name="sex" id="打拳对象性别" value="女">女
+				<input type="radio" name="sex" id="打拳对象性别" value="第三" checked>不男不女
+				<button id="AllRight" onclick="Total()" class="AllRightKey">生	成</button>
+				<!--
+				<button id="Empty" onclick="Empty()" class="FunctionKey">清	空</button>
+				<button id="Copy" onclick="Copy()" class="FunctionKey" data-clipboard-target="#ansarea">复	制</button><br/>
+				-->
+			</div>
+			<div id="article">
+				
+			</div>
+		</div>
+		<!--README-->
+		<div id='statement'>
+			<a href="./resource/README.html" class="链接" target='_blank' style='font-family: Consolas;font-size: 15px'>README</a>
+		</div>
+		<!--页脚-->
+		<div id='footer'>
+			<p>
+				<svg class="图标" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+				<span style="font-family: 圆体;font-size: 13px;margin-right: -5px">@</span>
+				<a class="链接" href="https://github.com/Cyrus-Cdy">拆家大主教</a>
+			</p>
+			<HR align=center width=100% color=#666666 SIZE=1></HR>
+			<p>
+				前端界面设计参考
+        		<span style="font-family: 圆体;font-size: 13px;margin-right: -5px">@</span>
+				<a class="链接" href="https://www.zhihu.com/people/su-lan-qia">suulnnka</a>
+				<span style="font-family: 圆体;font-size: 13px;margin-right: -5px">@</span>
+				<a class="链接" href="https://www.zhihu.com/people/ke-meng-90">menzi11</a>
+        		的「<a class="链接" href="https://github.com/menzi11/BullshitGenerator">狗屁不通文章生成器</a>」网页版的设计<br/>
+        		灵感来自<span style="font-family: 圆体;font-size: 13px;margin-right: 0px">@</span><a class="链接" href="https://gitee.com/yufengmuling/">蓦然随风</a>的python3项目「<a class="链接" href="https://gitee.com/yufengmuling/boxing_article_generator">打拳文章生成器</a>」，<span style="font-family: 圆体;font-size: 13px;margin-right: -5px">特此声明<br/>
+        		新手小白，代码和效果一样狗屁不通，还请海涵<span style="font-family: none;">(^o^)</span>
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery.min.js"></script>	<!--jQuery-->
+	<script type="text/javascript" src="resource/data.js"></script>	<!--jQuery-->
+	<script type="text/javascript" src="js/index.js"></script>	<!--jQuery-->
+</html>

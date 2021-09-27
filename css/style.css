@@ -1,0 +1,93 @@
+body{
+	background-color: rgb(255,255,255);
+	text-align: center;
+}
+#pop_up {
+	width: 200px;
+    height: 220px;
+    background-color: rgba(66,66,66,0.8);
+    color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 1em;
+    display: none;
+}
+#pop_up_img {
+	margin-left: 20px;
+	height: 150px;
+}
+#pop_up_word {
+	margin: -20px;
+	font-size: 20px;
+	color: rgb(193,193,193);
+}
+#all{
+	border: 2px solid #000000;
+	margin: 15px;
+	padding: 10px;
+	background-color: rgb(246,246,246);
+}
+#title{
+	font-family: 黑体;
+	font-size: 30px;
+	margin: 6px
+}
+.before_input {
+	font-size: 20px;
+}
+.input{
+	font-size: 20px;height: 20px;
+	background-color: rgb(246,246,246);
+	padding-bottom:5px;
+	margin-top: 10px;
+	border-top: 0;border-left: 0;border-right: 0;border-bottom: 1;
+	resize: none; 
+}
+#article {
+	text-align: left;
+    text-indent: 2em;
+}
+.FunctionKey{
+	width: 44%;
+	background-color: rgb(66,66,66);
+	color: #ffffff;
+	font-size: 25px;
+	margin-bottom: 3px;
+	margin-left: -2.5px; 
+	margin-right: -2.5px; 
+}
+.AllRightKey{
+	width: 100px;
+	background-color: rgb(66,66,66);
+	margin-top: 10px;
+	margin-left: 220px;
+	color: #ffffff;
+	font-size: 20px;
+}
+#statement {
+	position: absolute;
+	font-family: 黑体;
+	font-size: 12px;
+	padding-left: 16px;
+	padding-top: 45px;
+	text-align: left;
+}
+#footer{
+	font-family: 黑体;
+	font-size: 12px;
+	padding-right: 16px;
+	text-align: right;
+}
+.链接{
+	color: #666666;
+}
+.图标{
+	height: 14px;
+	margin: 2px,0px,0px;
+}
